@@ -22,7 +22,7 @@
         .sidebar {
             width: 240px;
             height: 100vh;
-            background-color: #273469;
+            background-color: #D96C9D;
             color: white;
             position: fixed;
             padding: 25px 20px;
@@ -58,7 +58,43 @@
 
         .menu a:hover,
         .menu a.active {
-            background-color: #40518f;
+            background-color: #C65386;
+        }
+
+        .menu-transaksi {
+            margin-bottom: 6px;
+        }
+
+        .menu-transaksi summary {
+            display: block;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .menu-transaksi summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .menu-transaksi summary::after {
+            content: "⌄";
+            float: right;
+        }
+
+        .menu-transaksi[open] summary::after {
+            content: "⌃";
+        }
+
+        .menu-transaksi summary:hover {
+            background-color: #C65386;
+        }
+
+        .menu-transaksi a {
+            margin-left: 12px;
+            font-size: 14px;
+            padding: 10px 12px;
         }
 
         .main-content {
@@ -118,16 +154,41 @@
             Florist Management System
         </div>
 
+
         <div class="menu">
             <div class="menu-title">Menu Utama</div>
 
-            <a href="/role">Manajemen Role</a>
-            <a href="/satuan">Manajemen Satuan</a>
-            <a href="/vendor">Manajemen Vendor</a>
-            <a href="/user">Manajemen User</a>
-            <a href="/barang">Manajemen Barang</a>
-            <a href="/margin-penjualan">Manajemen Margin Penjualan</a>
+            <a href="/dashboard">Dashboard</a>
+
+            <!-- Dropdown Data Master -->
+            <details class="menu-transaksi">
+                <summary>Data Master</summary>
+
+                <a href="/role">Manajemen Role</a>
+                <a href="/satuan">Manajemen Satuan</a>
+                <a href="/vendor">Manajemen Vendor</a>
+                <a href="/user">Manajemen User</a>
+                <a href="/barang">Manajemen Barang</a>
+                <a href="/margin-penjualan">Manajemen Margin Penjualan</a>
+            </details>
+
+            <!-- Dropdown Transaksi -->
+            <details class="menu-transaksi">
+                <summary>Transaksi</summary>
+
+                <a href="/pengadaan">Pengadaan</a>
+                <a href="/penerimaan">Penerimaan</a>
+                <a href="/penjualan">Penjualan</a>
+            </details>
+
         </div>
+
+        <!-- Dropdown Laporan -->
+        <details class="menu-transaksi">
+            <summary>Laporan</summary>
+
+            <a href="/kartu-stok">Kartu Stok</a>
+        </details>
 
     </aside>
 

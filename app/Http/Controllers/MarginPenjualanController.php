@@ -9,9 +9,20 @@ class MarginPenjualanController extends Controller
 {
     public function index()
     {
-        $margin = DB::select('SELECT * FROM view_margin_penjualan');
+    $margin = DB::select(
+        'SELECT
+            mp.idmargin_penjualan,
+            mp.persen,
+            mp.status,
+            u.username AS dibuat_oleh,
+            mp.created_at,
+            mp.updated_at
+        FROM margin_penjualan mp
+        LEFT JOIN `user` u ON mp.iduser = u.iduser
+        ORDER BY mp.idmargin_penjualan ASC'
+    );
 
-        return view('margin_penjualan.index', compact('margin'));
+    return view('margin_penjualan.index', compact('margin'));
     }
 
     public function create()
@@ -72,5 +83,22 @@ class MarginPenjualanController extends Controller
         );
 
         return redirect('/margin-penjualan');
+    }
+
+    public function aktifkan($id)
+    {
+    try {
+        DB::statement(
+            'CALL sp_aktifkan_margin(?)',
+            [$id]
+        );
+
+        return redirect('/margin-penjualan')
+            ->with('success', 'Margin penjualan berhasil diaktifkan.');
+
+    } catch (\Illuminate\Database\QueryException $e) {
+        return redirect('/margin-penjualan')
+            ->with('error', 'Gagal mengaktifkan margin: ' . $e->getMessage());
+    }
     }
 }
